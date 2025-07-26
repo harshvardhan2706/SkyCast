@@ -1,6 +1,5 @@
-
-import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import WeatherCard from './components/WeatherCard.jsx';
 import ForecastChart from './components/ForecastChart.jsx';
@@ -10,7 +9,10 @@ import "./styles/style.css";
 import "./styles/background.css";
 import './App.css';
 
+
+
 const API_KEY = "0ad3ba4ac3a12542c36f0a9bcb62ffaa"; // 🔁 OPENWEATHER API
+
 
 function App() {
   const [query, setQuery] = useState("");
@@ -18,19 +20,15 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [forecast, setForecast] = useState([]);
 
-
   const fetchForecast = async (city) => {
     try {
-      // const res = await fetch(
-      //   `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-      // );
-         const res = await fetch(
-           `http://localhost:8080/api/weather?city=${city}`
-         );
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
+      );
       if (!res.ok) throw new Error("Forecast API error");
       const data = await res.json();
       // Filter one forecast per day (around 12:00 PM)
-          const daily = data.forecast.filter(f => f.dt_txt && f.dt_txt.includes("12:00:00"));
+      const daily = data.list.filter(f => f.dt_txt.includes("12:00:00"));
       setForecast(daily);
     } catch (err) {
       console.error("Forecast error:", err.message);
