@@ -1,0 +1,123 @@
+.background-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Aurora effect */
+.aurora {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1), transparent 70%),
+              radial-gradient(circle at 30% 30%, rgba(255, 0, 255, 0.1), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(0, 255, 100, 0.1), transparent 60%);
+  animation: moveAurora 15s linear infinite;
+}
+
+@keyframes moveAurora {
+  0% { transform: translate(-10%, -10%) rotate(0deg); }
+  100% { transform: translate(10%, 10%) rotate(360deg); }
+}
+
+/* Cloud styles */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: floatClouds 60s linear infinite;
+}
+
+.cloud-1 {
+  width: 300px;
+  height: 100px;
+  top: 20%;
+  left: -300px;
+  animation-delay: 0s;
+}
+
+.cloud-2 {
+  width: 400px;
+  height: 120px;
+  top: 50%;
+  left: -400px;
+  animation-delay: 10s;
+}
+
+.cloud-3 {
+  width: 350px;
+  height: 110px;
+  top: 70%;
+  left: -350px;
+  animation-delay: 20s;
+}
+
+@keyframes floatClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(150vw); }
+}
+
+/* Full-screen animated background */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #1f1c2c, #928dab, #2c3e50, #4b6cb7);
+  background-size: 600% 600%;
+  animation: aurora 20s ease infinite;
+}
+
+/* Aurora animation */
+@keyframes aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Cloud layer */
+.cloud {
+  position: absolute;
+  background: url('https://i.ibb.co/3mxZyzc/cloud.png') repeat-x;
+  height: 200px;
+  width: 100%;
+  top: 20%;
+  opacity: 0.4;
+  animation: moveClouds 60s linear infinite;
+}
+
+/* More cloud layers with depth */
+.cloud:nth-child(2) {
+  top: 40%;
+  opacity: 0.2;
+  animation-duration: 90s;
+}
+
+.cloud:nth-child(3) {
+  top: 60%;
+  opacity: 0.15;
+  animation-duration: 120s;
+}
+
+@keyframes moveClouds {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100vw 0;
+  }
+}
