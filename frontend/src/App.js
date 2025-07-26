@@ -10,12 +10,30 @@ import "./styles/background.css";
 import './App.css';
 
 
+
 const API_KEY = "0ad3ba4ac3a12542c36f0a9bcb62ffaa"; // 🔁 OPENWEATHER API
+
 
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [forecast, setForecast] = useState([]);
+
+  const fetchForecast = async (city) => {
+    try {
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      if (!res.ok) throw new Error("Forecast API error");
+      const data = await res.json();
+      // Filter one forecast per day (around 12:00 PM)
+      const daily = data.list.filter(f => f.dt_txt.includes("12:00:00"));
+      setForecast(daily);
+    } catch (err) {
+      console.error("Forecast error:", err.message);
+    }
+  };
 
   const handleSearch = async () => {
     if (!query) return;
@@ -27,6 +45,7 @@ function App() {
       );
       const data = await res.json();
       setWeather(data);
+      await fetchForecast(query);
     } catch (err) {
       console.error(err);
     }
@@ -62,6 +81,25 @@ function App() {
           />
           <h3>{Math.round(weather.main.temp)}°C</h3>
           <p>{weather.weather[0].description}</p>
+        </div>
+      )}
+
+      {forecast.length > 0 && (
+        <div className="row mt-4 justify-content-center">
+          {forecast.map((day, index) => (
+            <div className="col-6 col-sm-4 col-md-2 mb-3" key={index}>
+              <div className="card text-center shadow-sm p-2 rounded">
+                <h6>{new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'short' })}</h6>
+                <img
+                  src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                  alt={day.weather[0].description}
+                  style={{ width: "50px" }}
+                />
+                <p className="mb-0">{Math.round(day.main.temp)}°C</p>
+                <small>{day.weather[0].main}</small>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
