@@ -1,10 +1,10 @@
 com\harshweather\model\OpenWeatherForecast.class
 com\harshweather\model\WeatherResponse.class
+com\harshweather\model\OpenWeatherCurrent.class
 com\harshweather\model\ForecastEntry$Main.class
 com\harshweather\model\OpenWeatherCurrent$Main.class
 com\harshweather\model\OpenWeatherCurrent$Weather.class
 com\harshweather\controller\WeatherController.class
-com\harshweather\WeatherApplication.class
-com\harshweather\model\OpenWeatherCurrent.class
 com\harshweather\model\ForecastEntry.class
 com\harshweather\service\WeatherService.class
+com\harshweather\WeatherApplication.class
