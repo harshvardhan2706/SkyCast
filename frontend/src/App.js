@@ -19,37 +19,25 @@ function App() {
   const [forecast, setForecast] = useState([]);
 
 
-  const fetchForecast = async (city) => {
-    try {
-      // const res = await fetch(
-      //   `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-      // );
-         const res = await fetch(
-           `http://localhost:8080/api/weather?city=${city}`
-         );
-      if (!res.ok) throw new Error("Forecast API error");
-      const data = await res.json();
-      // Filter one forecast per day (around 12:00 PM)
-          const daily = data.forecast.filter(f => f.dt_txt && f.dt_txt.includes("12:00:00"));
-      setForecast(daily);
-    } catch (err) {
-      console.error("Forecast error:", err.message);
-    }
-  };
-
   const handleSearch = async () => {
     if (!query) return;
     setLoading(true);
     setWeather(null);
+    setForecast([]);
     try {
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
-      );
-      const data = await res.json();
-      setWeather(data);
-      await fetchForecast(query);
-    } catch (err) {
-      console.error(err);
+      const response = await fetch(`https://skycast-backend-qnxm.onrender.com/api/weather?city=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      setWeather({
+        city: data.city,
+        temperature: data.temperature,
+        description: data.description,
+        icon: data.icon
+      });
+      // Filter one forecast per day (around 12:00 PM)
+      const daily = (data.forecast || []).filter(f => f.dt_txt && f.dt_txt.includes("12:00:00"));
+      setForecast(daily);
+    } catch (error) {
+      console.error("Error fetching weather:", error);
     }
     setLoading(false);
   };
