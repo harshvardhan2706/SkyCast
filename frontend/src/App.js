@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import Navbar from './components/Navbar.jsx';
 import WeatherCard from './components/WeatherCard.jsx';
 import ForecastChart from './components/ForecastChart.jsx';
