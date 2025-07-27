@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.png';
 import Navbar from './components/Navbar.jsx';
-import WeatherCard from './components/WeatherCard.jsx';
+import CurrentWeatherCard from './components/CurrentWeatherCard.jsx';
 import ForecastChart from './components/ForecastChart.jsx';
 import NewsFeed from './components/NewsFeed.jsx';
 import AnimatedBackground from './components/AnimatedBackground.jsx';
@@ -31,7 +31,17 @@ function App() {
         city: data.city,
         temperature: data.temperature,
         description: data.description,
-        icon: data.icon
+        icon: data.icon,
+        humidity: data.humidity,
+        wind: data.wind
+      });
+      console.log("Weather data:", {
+        city: data.city,
+        temperature: data.temperature,
+        description: data.description,
+        icon: data.icon,
+        humidity: data.humidity,
+        wind: data.wind
       });
       // Filter one forecast per day (around 12:00 PM)
       const daily = (data.forecast || []).filter(f => f.dt_txt && f.dt_txt.includes("12:00:00"));
@@ -62,17 +72,7 @@ function App() {
 
       {loading && <p className="loading-text">Loading...</p>}
 
-      {weather && weather.main && (
-        <div className="weather-card">
-          <h2>{weather.name}, {weather.sys.country}</h2>
-          <img
-            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt="Weather Icon"
-          />
-          <h3>{Math.round(weather.main.temp)}°C</h3>
-          <p>{weather.weather[0].description}</p>
-        </div>
-      )}
+      <CurrentWeatherCard weather={weather} />
 
       {forecast.length > 0 ? (
         <div className="row mt-4 justify-content-center">
