@@ -37,6 +37,8 @@ public class WeatherService {
         weatherResponse.setTemperature(current.getMain().getTemp());
         weatherResponse.setDescription(current.getWeather().get(0).getDescription());
         weatherResponse.setIcon(current.getWeather().get(0).getIcon());
+        weatherResponse.setHumidity(current.getMain().getHumidity());
+        weatherResponse.setWind(current.getMain().getSpeed());
         weatherResponse.setForecast(forecast.getList());
 
         return weatherResponse;

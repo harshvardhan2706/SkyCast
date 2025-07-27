@@ -14,8 +14,17 @@ public class OpenWeatherCurrent {
 
     public static class Main{
         private double temp;
+        private int humidity;
+        private double speed;
+
         public double getTemp(){return temp;}
         public void setTemp(double temp){this.temp = temp;}
+
+        public int getHumidity() { return humidity; }
+        public void setHumidity(int humidity) { this.humidity = humidity; }
+
+        public double getSpeed() { return speed; }
+        public void setSpeed(double speed) { this.speed = speed; }
     }
 
     public  static class Weather{

@@ -7,10 +7,11 @@ public class WeatherResponse {
     private double temperature;
     private String description;
     private String icon;
+    private int humidity;
+    private double wind;
     private List<ForecastEntry> forecast;
     
     //Getter & Setters
-    // Getters & Setters
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
 
@@ -22,6 +23,12 @@ public class WeatherResponse {
 
     public String getIcon() { return icon; }
     public void setIcon(String icon) { this.icon = icon; }
+
+    public int getHumidity() { return humidity; }
+    public void setHumidity(int humidity) { this.humidity = humidity; }
+
+    public double getWind() { return wind; }
+    public void setWind(double wind) { this.wind = wind; }
 
     public List<ForecastEntry> getForecast() { return forecast; }
     public void setForecast(List<ForecastEntry> forecast) { this.forecast = forecast; }
