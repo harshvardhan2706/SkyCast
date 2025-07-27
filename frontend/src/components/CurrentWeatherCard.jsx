@@ -9,15 +9,15 @@ const CurrentWeatherCard = ({ weather }) => {
       <div className="weather-icon">
         <img
           src={`https://openweathermap.org/img/wn/${weather.icon}@4x.png`}
-          alt={weather.condition}
+          alt={weather.description}
         />
       </div>
       <h2 className="weather-city">{weather.city}</h2>
-      <div className="weather-temp">{Math.round(weather.temperature)}°C</div>
-      <div className="weather-condition">{weather.condition}</div>
+      <div className="weather-temp">{weather.temperature !== undefined ? Math.round(weather.temperature) : '--'}°C</div>
+      <div className="weather-condition">{weather.description || '--'}</div>
       <div className="weather-details">
-        <span>Humidity: {weather.humidity}%</span>
-        <span>Wind: {weather.wind} km/h</span>
+        <span>Humidity: {weather.humidity !== undefined ? weather.humidity + '%' : '--'}</span>
+        <span>Wind: {weather.wind !== undefined ? weather.wind + ' km/h' : '--'}</span>
       </div>
     </div>
   );
