@@ -74,7 +74,7 @@ function App() {
         </div>
       )}
 
-      {forecast.length > 0 && (
+      {forecast.length > 0 ? (
         <div className="row mt-4 justify-content-center">
           {forecast.map((day, index) => (
             <div className="col-6 col-sm-4 col-md-2 mb-3" key={index}>
@@ -90,6 +90,10 @@ function App() {
               </div>
             </div>
           ))}
+        </div>
+      ) : (
+        <div className="row mt-4 justify-content-center">
+          <p className="text-center text-muted">No forecast available.</p>
         </div>
       )}
     </div>
